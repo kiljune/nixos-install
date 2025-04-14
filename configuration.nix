@@ -118,7 +118,7 @@ in
       btrfs subvolume delete "$1"
     }
 
-    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +3); do
+    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +1); do
       delete_subvolume_recursively "$i"
     done
 
@@ -143,6 +143,34 @@ in
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
+
+    users.kiljune = {
+      directories = [
+        "Desktop"
+        "Documents"
+        "Downloads"
+        "Music"
+        "Pictures"
+        "Public"
+        "Templates"
+        "Videos"
+	".config"
+        { directory = ".gnupg"; mode = "0700"; }
+        { directory = ".ssh"; mode = "0700"; }
+        { directory = ".local/share/keyrings"; mode = "0700"; }
+        ".local/share/direnv"
+	".librewolf"
+	"dotfiles"
+	"nixos-config"
+	"projects"
+      ];
+      files = [
+        #".screenrc"
+        ".bashrc"
+        ".profile"
+        ".zshrc"
+      ];
+    };
   };
 
   # github impermanence Issues Persisting passwords (/etc/shadow) #120

@@ -51,10 +51,6 @@
                   mountOptions = ["noatime"];
                   mountpoint = "/nix";
                 };
-                "@home" = {
-                  mountOptions = ["noatime"];
-                  mountpoint = "/home";
-                };
               };
             };
           };
