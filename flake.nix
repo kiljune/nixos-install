@@ -26,11 +26,10 @@
       modules = [
         inputs.disko.nixosModules.default
         (import ./disko.nix)
-
-        ./configuration.nix
-              
         #inputs.home-manager.nixosModules.default
         inputs.impermanence.nixosModules.impermanence
+
+        ./configuration.nix
       ];
     };
   };

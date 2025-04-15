@@ -40,9 +40,6 @@
               extraArgs = ["-f"];
 
               subvolumes = {
-                "@root" = {
-                  mountpoint = "/";
-                };
                 "@persistent" = {
                   mountOptions = ["noatime"];
                   mountpoint = "/persistent";
