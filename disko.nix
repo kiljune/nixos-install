@@ -40,12 +40,15 @@
               extraArgs = ["-f"];
 
               subvolumes = {
+                "@root" = {
+                  mountpoint = "/";
+                };
                 "@persistent" = {
-                  mountOptions = ["noatime"];
+                  mountOptions = ["noatime" "compress=zstd"];
                   mountpoint = "/persistent";
                 };
                 "@nix" = {
-                  mountOptions = ["noatime"];
+                  mountOptions = ["noatime" "compress=zstd"];
                   mountpoint = "/nix";
                 };
               };

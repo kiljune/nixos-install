@@ -25,24 +25,6 @@ in
     options = [ "size=4G" "mode=777" ];
   };
 
-  fileSystems."/persistent" = {
-    device = "/dev/root_vg/root";
-    neededForBoot = true;
-    fsType = "btrfs";
-    options = [ "subvol=@persistent" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/root_vg/root";
-    fsType = "btrfs";
-    options = [ "subvol=@nix" ];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-partlabel/disk-main-ESP";
-    fsType = "vfat";
-  };
-
   # mount Backup disk
   fileSystems."/mnt/Backup" = {
     device = "/dev/disk/by-uuid/f93716d0-89e3-4dfc-a05b-1829a2da0c82";
@@ -131,6 +113,7 @@ in
     keepassxc
   ];
 
+  fileSystems."/persistent".neededForBoot = true;
   environment.persistence."/persistent" = {
     enable = true;  # NB: Defaults to true, not needed
     hideMounts = true;
