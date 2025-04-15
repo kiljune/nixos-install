@@ -161,8 +161,7 @@ in
 	".config"
         { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
-        { directory = ".local/share/keyrings"; mode = "0700"; }
-        ".local/share/direnv"
+        { directory = ".local"; mode = "0700"; }
 	".librewolf"
 	"dotfiles"
 	"nixos-config"
