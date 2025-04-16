@@ -13,18 +13,6 @@ in
       ./hardware-configuration.nix
     ];
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "defaults" "size=2G" "mode=755" ];
-  };
-
-  fileSystems."/home/kiljune" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "size=4G" "mode=777" ];
-  };
-
   # mount Backup disk
   fileSystems."/mnt/Backup" = {
     device = "/dev/disk/by-uuid/f93716d0-89e3-4dfc-a05b-1829a2da0c82";
@@ -61,11 +49,9 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -112,6 +98,20 @@ in
     librewolf
     keepassxc
   ];
+
+  boot.initrd.postResumeCommands = lib.mkAfter ''
+    mkdir /btrfs_tmp
+    mount /dev/root_vg/root /btrfs_tmp
+    if [[ -e /btrfs_tmp/@root ]]; then
+      btrfs subvolume delete /btrfs_tmp/@root/srv
+      btrfs subvolume delete /btrfs_tmp/@root/var/lib/portables
+      btrfs subvolume delete /btrfs_tmp/@root/var/lib/machines
+      btrfs subvolume delete /btrfs_tmp/@root
+    fi
+
+    btrfs subvolume create /btrfs_tmp/@root
+    umount /btrfs_tmp
+  '';
 
   fileSystems."/persistent".neededForBoot = true;
   environment.persistence."/persistent" = {
