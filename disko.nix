@@ -43,6 +43,10 @@
                 "@root" = {
                   mountpoint = "/";
                 };
+                "@home" = {
+                  mountOptions = ["noatime" "compress=zstd"];
+                  mountpoint = "/home";
+                };
                 "@persistent" = {
                   mountOptions = ["noatime" "compress=zstd"];
                   mountpoint = "/persistent";

@@ -130,33 +130,6 @@ in
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
-
-    users.kiljune = {
-      directories = [
-        "Desktop"
-        "Documents"
-        "Downloads"
-        "Music"
-        "Pictures"
-        "Public"
-        "Templates"
-        "Videos"
-	".config"
-        { directory = ".gnupg"; mode = "0700"; }
-        { directory = ".ssh"; mode = "0700"; }
-        { directory = ".local"; mode = "0700"; }
-	".librewolf"
-	"dotfiles"
-	"nixos-config"
-	"projects"
-      ];
-      files = [
-        #".screenrc"
-        #".bashrc"
-        #".profile"
-        #".zshrc"
-      ];
-    };
   };
 
   # github impermanence Issues Persisting passwords (/etc/shadow) #120
