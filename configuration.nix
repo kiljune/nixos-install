@@ -104,6 +104,8 @@ in
     mount /dev/root_vg/root /btrfs_tmp
     if [[ -e /btrfs_tmp/@root ]]; then
       btrfs subvolume delete /btrfs_tmp/@root/srv
+      btrfs subvolume delete /btrfs_tmp/@root/tmp
+      btrfs subvolume delete /btrfs_tmp/@root/var/tmp
       btrfs subvolume delete /btrfs_tmp/@root/var/lib/portables
       btrfs subvolume delete /btrfs_tmp/@root/var/lib/machines
       btrfs subvolume delete /btrfs_tmp/@root
