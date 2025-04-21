@@ -103,12 +103,15 @@ in
     mkdir /btrfs_tmp
     mount /dev/root_vg/root /btrfs_tmp
     if [[ -e /btrfs_tmp/@root ]]; then
-      btrfs subvolume delete /btrfs_tmp/@root/srv
-      btrfs subvolume delete /btrfs_tmp/@root/tmp
-      btrfs subvolume delete /btrfs_tmp/@root/var/tmp
-      btrfs subvolume delete /btrfs_tmp/@root/var/lib/portables
-      btrfs subvolume delete /btrfs_tmp/@root/var/lib/machines
-      btrfs subvolume delete /btrfs_tmp/@root
+      delete_subvolume_recursively() {
+        IFS=$'\n'
+        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+          delete_subvolume_recursively "/btrfs_tmp/$i"
+        done
+        btrfs subvolume delete "$1"
+      }
+
+      delete_subvolume_recursively "/btrfs_tmp/@root"
     fi
 
     btrfs subvolume create /btrfs_tmp/@root
