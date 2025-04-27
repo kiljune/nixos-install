@@ -97,6 +97,7 @@ in
     wl-clipboard
     librewolf
     keepassxc
+    firewalld-gui
   ];
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
