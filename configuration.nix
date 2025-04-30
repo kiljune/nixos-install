@@ -97,6 +97,8 @@ in
     wl-clipboard
     librewolf
     keepassxc
+		seahorse
+		gcr
     firewalld-gui
   ];
 
