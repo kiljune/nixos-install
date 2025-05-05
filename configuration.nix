@@ -80,7 +80,7 @@ in
     ];
   };
 
-  #programs.firefox.enable = true;
+  programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -95,10 +95,9 @@ in
     lazygit
     xclip
     wl-clipboard
-    librewolf
     keepassxc
-		seahorse
-		gcr
+    seahorse
+    gcr
     firewalld-gui
   ];
 
