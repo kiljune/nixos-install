@@ -80,7 +80,7 @@ in
     ];
   };
 
-  programs.firefox.enable = true;
+  #programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -96,6 +96,8 @@ in
     xclip
     wl-clipboard
     keepassxc
+		librewolf
+		firewalld-gui
   ];
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
