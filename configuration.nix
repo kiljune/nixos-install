@@ -103,7 +103,7 @@ in
   boot.initrd.postResumeCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
     mount /dev/root_vg/root /btrfs_tmp
-    if [[ -e /btrfs_tmp/@root ]]; then
+    if [[ -e /btrfs_tmp/@rootfs ]]; then
       delete_subvolume_recursively() {
         IFS=$'\n'
         for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
@@ -112,10 +112,10 @@ in
         btrfs subvolume delete "$1"
       }
 
-      delete_subvolume_recursively "/btrfs_tmp/@root"
+      delete_subvolume_recursively "/btrfs_tmp/@rootfs"
     fi
 
-    btrfs subvolume create /btrfs_tmp/@root
+    btrfs subvolume create /btrfs_tmp/@rootfs
     umount /btrfs_tmp
   '';
 
