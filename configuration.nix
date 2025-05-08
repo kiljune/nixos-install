@@ -96,9 +96,6 @@ in
     xclip
     wl-clipboard
     keepassxc
-    seahorse
-    gcr
-    firewalld-gui
   ];
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
