@@ -96,8 +96,9 @@ in
     xclip
     wl-clipboard
     keepassxc
-		librewolf
-		firewalld-gui
+    librewolf
+    firewalld-gui
+    home-manager
   ];
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
@@ -167,11 +168,10 @@ in
   };
 
   home-manager = {
-		extraSpecialArgs = {inherit inputs;};
-		users = {
-		  "kiljune" = import ./home.nix;
-		};
-	};
+    users = {
+      "kiljune" = import ./home.nix;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
