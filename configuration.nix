@@ -96,6 +96,7 @@ in
     xclip
     wl-clipboard
     keepassxc
+    ptyxis
     firewalld-gui
     home-manager
   ];
