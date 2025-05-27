@@ -6,7 +6,7 @@
     disk.main = {
       #device = "/dev/disk/by-id/ata-2.5__SSD_512GB_CL2025022400573K";
       inherit device;
-			type = "disk";
+      type = "disk";
       content = {
         type = "gpt";
         partitions = {
