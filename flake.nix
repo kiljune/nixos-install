@@ -25,9 +25,8 @@
       specialArgs = {inherit inputs;};
       modules = [
         inputs.disko.nixosModules.default
-				#(import ./disko.nix)
         #(import ./disko.nix { device = "/dev/sda"; })
-				(import ./disko.nix { device = "/dev/disk/by-id/ata-2.5__SSD_512GB_CL2025022400573K"; })
+        (import ./disko.nix { device = "/dev/disk/by-id/ata-2.5__SSD_512GB_CL2025022400573K"; })
         inputs.home-manager.nixosModules.default
         inputs.impermanence.nixosModules.impermanence
 
