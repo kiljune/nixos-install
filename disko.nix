@@ -1,7 +1,7 @@
 {
-	device ? throw "Set this to your disk device, e.g. /dev/sda"
+	device ? throw "Set this to your disk device, e.g. /dev/sda",
 	...
-}; {
+}: {
   disko.devices = {
     disk.main = {
       #device = "/dev/disk/by-id/ata-2.5__SSD_512GB_CL2025022400573K";
