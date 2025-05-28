@@ -98,7 +98,7 @@ in
     keepassxc
     ptyxis
     firewalld-gui
-    home-manager
+    #home-manager
   ];
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
@@ -167,11 +167,11 @@ in
     };
   };
 
-  home-manager = {
-    users = {
-      "kiljune" = import ./home.nix;
-    };
-  };
+  #home-manager = {
+  #  users = {
+  #    "kiljune" = import ./home.nix;
+  #  };
+  #};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
