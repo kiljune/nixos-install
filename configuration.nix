@@ -80,7 +80,7 @@ in
     ];
   };
 
-  programs.firefox.enable = true;
+  programs.firefox.enable = false;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -95,7 +95,6 @@ in
     lazygit
     xclip
     wl-clipboard
-    keepassxc
     ptyxis
     firewalld-gui
     #home-manager
