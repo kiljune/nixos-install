@@ -1,17 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   pShadow = "/persistent/etc/shadow";
   pShadowParent = "/persistent/etc";
-in
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+in {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # mount Backup disk
   fileSystems."/mnt/Backup" = {
@@ -20,23 +22,23 @@ in
   };
 
   # Enable the Flakes feature
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = true;
 
   # Use the grub EFI boot loader.
-	boot.loader.grub.enable = true;
-	boot.loader.grub.efiSupport = true;
-	boot.loader.grub.device = "nodev";
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = false;
-	boot.loader.grub.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Seoul";
@@ -48,9 +50,9 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   #console = {
-    #font = "Lat2-Terminus16";
-    #keyMap = "us";
-    #useXkbConfig = true; # use xkb.options in tty.
+  #font = "Lat2-Terminus16";
+  #keyMap = "us";
+  #useXkbConfig = true; # use xkb.options in tty.
   #};
 
   # Enable the X11 windowing system.
@@ -82,7 +84,7 @@ in
   users.users.kiljune = {
     isNormalUser = true;
     initialPassword = "1234";
-    extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["networkmanager" "wheel"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
@@ -128,7 +130,7 @@ in
 
   fileSystems."/persistent".neededForBoot = true;
   environment.persistence."/persistent" = {
-    enable = true;  # NB: Defaults to true, not needed
+    enable = true; # NB: Defaults to true, not needed
     hideMounts = true;
     directories = [
       "/etc/nixos"
@@ -138,11 +140,19 @@ in
       "/var/lib/systemd/coredump"
       "/var/lib/libvirt"
       "/etc/NetworkManager/system-connections"
-      { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
+      {
+        directory = "/var/lib/colord";
+        user = "colord";
+        group = "colord";
+        mode = "u=rwx,g=rx,o=";
+      }
     ];
     files = [
       "/etc/machine-id"
-      { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+      {
+        file = "/var/keys/secret_file";
+        parentDirectory = {mode = "u=rwx,g=,o=";};
+      }
     ];
   };
 
