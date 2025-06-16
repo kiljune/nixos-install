@@ -5,6 +5,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   pShadow = "/persistent/etc/shadow";
@@ -13,6 +14,7 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.nix-flatpak.nixosModules.nix-flatpak
   ];
 
   # mount Backup disk
@@ -24,25 +26,24 @@ in {
   # Enable the Flakes feature
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  
   boot = {
-		  loader = {
-        # Use the systemd-boot EFI boot loader.
-		    systemd-boot = {
-					enable = true;
-					consoleMode = "max";
-				};
-        # Use the grub EFI boot loader.
-        grub = {
-					enable = false;
-          efiSupport = true;
-          device = "nodev";
-          useOSProber = false;
-				};
+    loader = {
+      # Use the systemd-boot EFI boot loader.
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
+      # Use the grub EFI boot loader.
+      grub = {
+        enable = false;
+        efiSupport = true;
+        device = "nodev";
+        useOSProber = false;
+      };
 
-        efi.canTouchEfiVariables = true;
-				timeout = 2;
-		};
+      efi.canTouchEfiVariables = true;
+      timeout = 2;
+    };
   };
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
@@ -118,6 +119,26 @@ in {
     firewalld-gui
     #home-manager
   ];
+
+  # Install Flatpak apps
+  services = {
+    flatpak = {
+      enable = true;
+      packages = [
+        "com.github.tchx84.Flatseal"
+        "org.mozilla.firefox"
+        "org.keepassxc.KeePassXC"
+        "com.mattjakeman.ExtensionManager"
+      ];
+    };
+  };
+
+  systemd.services.flatpak-repo = {
+    path = [pkgs.flatpak];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
 
   boot.initrd.postResumeCommands = lib.mkAfter ''
     mkdir /btrfs_tmp
