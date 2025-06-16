@@ -24,16 +24,26 @@ in {
   # Enable the Flakes feature
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  # Use the systemd-boot EFI boot loader.
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
+  
+  boot = {
+		  loader = {
+        # Use the systemd-boot EFI boot loader.
+		    systemd-boot = {
+					enable = true;
+					consoleMode = "max";
+				};
+        # Use the grub EFI boot loader.
+        grub = {
+					enable = false;
+          efiSupport = true;
+          device = "nodev";
+          useOSProber = false;
+				};
 
-  # Use the grub EFI boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = false;
-  boot.loader.efi.canTouchEfiVariables = true;
+        efi.canTouchEfiVariables = true;
+				timeout = 2;
+		};
+  };
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   # Pick only one of the below networking options.
