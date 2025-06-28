@@ -19,7 +19,7 @@ in {
 
   # mount Backup disk
   fileSystems."/mnt/Backup" = {
-    device = "/dev/disk/by-uuid/f93716d0-89e3-4dfc-a05b-1829a2da0c82";
+    device = "/dev/disk/by-uuid/68d28b8f-aa8e-4463-96dc-407e3e877d15";
     fsType = "ext4";
   };
 
