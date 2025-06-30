@@ -11,8 +11,6 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-
     #home-manager = {
     #  url = "github:nix-community/home-manager";
     #  inputs.nixpkgs.follows = "nixpkgs";
