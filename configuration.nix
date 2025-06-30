@@ -100,7 +100,7 @@ in {
     ];
   };
 
-  programs.firefox.enable = false;
+  programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -126,7 +126,7 @@ in {
       enable = true;
       packages = [
         "com.github.tchx84.Flatseal"
-        "org.mozilla.firefox"
+        #"org.mozilla.firefox"
         "org.keepassxc.KeePassXC"
         "com.mattjakeman.ExtensionManager"
       ];
