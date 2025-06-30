@@ -117,6 +117,7 @@ in {
     wl-clipboard
     ptyxis
     firewalld-gui
+		keepassxc
     #home-manager
   ];
 
@@ -127,7 +128,7 @@ in {
       packages = [
         "com.github.tchx84.Flatseal"
         #"org.mozilla.firefox"
-        "org.keepassxc.KeePassXC"
+        #"org.keepassxc.KeePassXC"
         "com.mattjakeman.ExtensionManager"
       ];
     };
